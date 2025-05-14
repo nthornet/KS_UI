@@ -14,7 +14,7 @@ function App() {
   const handleSearch = async (query) => {
     console.log('Search query:', query);
     try {
-      const endpoint = `https://rag-api-app.azurewebsites.net?query=${encodeURIComponent(query)}`;
+      const endpoint = `https://rag-api-app.azurewebsites.net`;
       const response = await fetch(endpoint);
       // If your API returns JSON, use .json() instead:
       // const data = await response.json();
