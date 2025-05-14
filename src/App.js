@@ -14,16 +14,16 @@ function App() {
   const handleSearch = async (query) => {
     console.log('Search query:', query);
     try {
-      const response = await fetch('https://rag-api-app.azurewebsites.net/docs', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        //body: JSON.stringify({ query }),
-      });
-      const data = await response.json();
-      console.log('API response:', data);
-      setResult(data);
+      const endpoint = `https://rag-api-app.azurewebsites.net?query=${encodeURIComponent(query)}`;
+      const response = await fetch(endpoint);
+      // If your API returns JSON, use .json() instead:
+      // const data = await response.json();
+      const text = await response.text();
+      console.log('API response:', text);
+      setResult(text);
     } catch (error) {
       console.error('Error calling API:', error);
+      setResult('Error fetching data');
     }
   };
 
@@ -31,8 +31,11 @@ function App() {
     <div className="App">
       <h1 className="title">What are you working on?</h1>
       <SearchBar onFileSelect={handleFileSelect} onSearch={handleSearch} />
-      {file && <p>Selected: {file.name}</p>}
-      {result && <pre className="result">{JSON.stringify(result, null, 2)}</pre>}
+      {file && <p className="info">Selected: {file.name}</p>}
+
+      <div className="chat-container">
+        {result && <div className="bubble">{result}</div>}
+      </div>
     </div>
   );
 }
