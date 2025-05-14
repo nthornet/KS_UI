@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FiPlus, FiMic, FiSend } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 import './SearchBar.css';
 
 export default function SearchBar({ onFileSelect, onSearch }) {
@@ -15,10 +15,10 @@ export default function SearchBar({ onFileSelect, onSearch }) {
     if (e.key === 'Enter' && onSearch) onSearch(e.target.value);
   };
 
-  const handleSend = () => {
-    const val = document.getElementById('search-input').value;
-    if (onSearch) onSearch(val);
-  };
+ // const handleSend = () => {
+ //   const val = document.getElementById('search-input').value;
+ //   if (onSearch) onSearch(val);
+ // };
 
   return (
     <div className="search-bar">
